@@ -4,6 +4,9 @@ const ratingSchema = `type Rating {
     movieId: Int!
     rating: Int!
     review: String!
+    createdAt: String
+    updatedAt: String
+    deletedAt: String
   }`
 
 export default ratingSchema

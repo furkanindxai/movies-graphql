@@ -20,7 +20,16 @@ const userResolvers = {
         restoreUser(_, args, { dataSources }) {
             const {id} = args
             return dataSources.moviesAPI.restoreUser(id)
-        }
+        },
+        updateUser(_, args, { dataSources }) {
+            const { email } = args
+            return dataSources.moviesAPI.updateUser(email) 
+        },
+        updatePassword(_, args, { dataSources }) {
+            const {password, newPassword, confirmPassword} = args
+            return dataSources.moviesAPI.updatePassword(password, newPassword, confirmPassword)
+        },
+
     }
 }
 

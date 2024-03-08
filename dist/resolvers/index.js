@@ -1,6 +1,7 @@
 import movieResolvers from "./movieResolvers.js";
 import authResolvers from "./authResolvers.js";
 import userResolvers from "./userResolvers.js";
+import ratingResolvers from "./ratingResolvers.js";
 export const resolvers = {
     SignInResponse: {
         __resolveType(obj, contextValue, info) {
@@ -13,14 +14,27 @@ export const resolvers = {
             return null;
         },
     },
+    UserMovie: {
+        __resolveType(obj, contextValue, info) {
+            if (obj.Movie) {
+                return 'RatedMovie';
+            }
+            else {
+                return 'Movie';
+            }
+        },
+    },
     Query: {
         ...movieResolvers.queries,
         ...authResolvers.queries,
-        ...userResolvers.queries
+        ...userResolvers.queries,
+        ...ratingResolvers.queries
     },
     Mutation: {
         ...authResolvers.mutations,
         ...movieResolvers.mutations,
-        ...userResolvers.mutations
-    }
+        ...userResolvers.mutations,
+        ...ratingResolvers.mutations
+    },
+    Movie: movieResolvers.Movie
 };

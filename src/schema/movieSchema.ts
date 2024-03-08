@@ -1,5 +1,6 @@
 const movieSchema = `type Movie {
     id: ID!
+    poster: Int!
     title: String!
     directors: [String!]!
     producers: [String!]!
@@ -12,6 +13,7 @@ const movieSchema = `type Movie {
     createdAt: String
     updatedAt: String
     deletedAt: String
+    ratings: [Rating!]
   }`
 
 export default movieSchema

@@ -59,6 +59,62 @@ class MoviesAPI extends RESTDataSource {
   restoreUser(id: bigint) {
     return this.patch(`${this.baseURL}users/restore/${id}`)
   }
+
+  updateUser(email: string) {
+    return this.put(`${this.baseURL}users/me`, { body:  {email}})
+  }
+
+  updatePassword(password: string, newPassword: string, confirmPassword: string) {
+    return this.patch(`${this.baseURL}users/me/password`, { body:  {password, newPassword, confirmPassword}})
+  }
+
+  getUserMovies(type: string) {
+    return this.get(`${this.baseURL}users/me/movies/`, {
+      params: {
+        type
+      }
+    })
+  }
+
+  deleteMovie(id: bigint) {
+    return this.delete(`${this.baseURL}movies/${id}`)
+  }
+
+  restoreMovie(id: bigint) {
+    return this.patch(`${this.baseURL}movies/restore/${id}`) 
+  }
+
+  addPoster(id: bigint, image: string, imageThumbnail: string) {
+    return this.patch(`${this.baseURL}movies/${id}`, { body: {image, imageThumbnail}})
+  }
+
+  rateMovie(id, rating, review) {
+    return this.post(`${this.baseURL}movies/${id}/ratings`, { body: {rating, review} })
+  }
+
+  updateMovie(id, description) {
+    return this.put(`${this.baseURL}movies/${id}`, { body: {description} })
+  }
+
+  getMovieRatings(id) {
+    return this.get(`${this.baseURL}movies/${id}/ratings`)
+  }
+
+  getRatings(params) {
+    return this.get(`${this.baseURL}ratings/`, { params })
+  }
+
+  getRating(id) {
+    return this.get(`${this.baseURL}ratings/${id}`)
+  }
+
+  deleteRating(id: bigint) {
+    return this.delete(`${this.baseURL}ratings/${id}`)
+  }
+
+  restoreRating(id: bigint) {
+    return this.patch(`${this.baseURL}ratings/restore/${id}`) 
+  }
 }
 
 export default MoviesAPI
